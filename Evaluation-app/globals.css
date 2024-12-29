@@ -1,0 +1,246 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+ 
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+ 
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+ 
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+ 
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+ 
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+
+    --radius: 0.75rem;
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight;
+  }
+}
+
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+}
+
+/* Custom Animations */
+.tracking-in-expand {
+  animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+
+.hover-card-glow {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.hover-card-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(to right, var(--primary), var(--ring));
+  z-index: -1;
+  border-radius: calc(var(--radius) + 1px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hover-card-glow:hover::before {
+  opacity: 0.5;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted rounded-full;
+  border: 2px solid hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted/80;
+}
+
+/* Chart Customizations */
+.recharts-default-tooltip {
+  @apply !bg-background/95 !border-border !backdrop-blur-sm !shadow-lg !rounded-lg !px-4 !py-2;
+}
+
+.recharts-tooltip-label {
+  @apply !text-foreground !font-medium !mb-1;
+}
+
+.recharts-tooltip-item {
+  @apply !text-muted-foreground;
+}
+
+/* Loading States */
+.skeleton {
+  @apply animate-pulse bg-muted rounded;
+}
+
+/* Focus Styles */
+:focus-visible {
+  @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+}
+
+/* Custom Animations */
+@keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Glass Effect */
+.glass {
+  @apply bg-background/50 backdrop-blur-lg border border-border/50;
+}
+
+.glass-hover {
+  @apply hover:bg-background/60 transition-colors duration-200;
+}
+
+/* Card Enhancements */
+.card-hover-effect {
+  @apply transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/20;
+}
+
+/* Button Enhancements */
+.button-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.button-glow::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  animation: button-glow 3s linear infinite;
+}
+
+@keyframes button-glow {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+/* Grid Background */
+.grid-background {
+  background-image: linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: 0 0;
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}
+
+/* Gradient Text */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-ring;
+}
+
+/* Chart Tooltips */
+.chart-tooltip {
+  @apply !bg-background/95 !backdrop-blur-sm !border !border-border !shadow-lg !rounded-lg !p-3;
+}
+
+/* Navigation Active States */
+.nav-item-active {
+  @apply bg-primary/10 text-primary relative;
+}
+
+.nav-item-active::before {
+  content: '';
+  @apply absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-primary rounded-r;
+}
+
+/* Form Elements */
+.form-input-focused {
+  @apply focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  @apply w-5 h-5 border-2 border-primary/30 border-t-primary rounded-full animate-spin;
+}
+
+/* Transitions */
+.transition-all-200 {
+  @apply transition-all duration-200 ease-in-out;
+}
+
+.transition-transform-200 {
+  @apply transition-transform duration-200 ease-in-out;
+}
+
+/* Shadows */
+.shadow-glow {
+  box-shadow: 0 0 20px -5px hsl(var(--primary) / 0.2);
+}
+
+.shadow-glow-hover {
+  @apply transition-shadow duration-300;
+}
+
+.shadow-glow-hover:hover {
+  box-shadow: 0 0 30px -5px hsl(var(--primary) / 0.3);
+}
